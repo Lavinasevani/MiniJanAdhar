@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script> 
+  <title>CreateJanAdhaar</title>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+
+<div class="flex flex-col items-center justify-center light">
+  <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">
+       JanAdhaar Number
+    </h2>
+
+    <form  class="flex flex-col" th:action="@{'/user/confirm-janCard'}" th:object="${userForm}"  method="post">
+      <input
+        type="text"
+        class="bg-gray-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+        placeholder="12 digit Number"
+      />
+
+      <button
+        type="submit"
+        class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
+      >
+        Get Adhar
+      </button>
+    </form>
+
+    <div class="flex justify-center mt-4">
+      <a href="#" class="text-sm text-gray-600 hover:underline"
+        >Privacy Policy</a
+      >
+    </div>
+  </div>
+</div>
+
+</body>
+</body>
+</html>

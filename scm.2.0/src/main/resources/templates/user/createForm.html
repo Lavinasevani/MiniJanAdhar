@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+    <title>CreateJanAdhaar</title>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mt-4 text-center">
+        <h2 class="font-bold text-lg text-blue-950">New Enrollment Form</h2>
+    </div>
+    <form id="main-form" data-th-action="@{'/user/JanCard'}" th:object="${userForm}" method="post">
+        <div class="mx-px flex flex-col bg-sky-50 rounded-lg p-4 shadow-sm">
+
+            <h3 class="italic text-lg text-sky-500">Personal Details</h3>
+
+            <div class="mt-4 flex flex-row space-x-2">
+                <div class="flex-1">
+                    <label class="text-black" for="name">Name</label><span class="text-red-500">*</span>
+                    <input id="main-name" placeholder="your name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="father-name">Father Name</label><span class="text-red-500">*</span>
+                    <input id="father-name" placeholder="father name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="mother-name">Mother Name</label><span class="text-red-500">*</span>
+                    <input id="mother-name" placeholder="mother name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+            </div>
+
+            <div class="mt-4 flex flex-row space-x-2">
+                <div class="flex-1">
+                    <label class="text-black" for="dob">DoB</label><span class="text-red-500">*</span>
+                    <input id="dob" placeholder="Your Date of Birth" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="date">
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="gender">Gender</label><span class="text-red-500">*</span>
+                    <select id="gender" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1">
+                        <option value="">Your Gender</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="adhar">Adhar<span class="text-red-500">*</span></label>
+                    <input id="adhar" name="adhar" placeholder="12 digit adhar Number" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" pattern="\d{12}" maxlength="12" >
+                </div>
+            </div>
+
+            <h3 class="mt-4 italic text-lg text-sky-500">Professional Details</h3>
+
+            <div class="mt-4 flex flex-row space-x-2">
+                <div class="flex-1">
+                    <label class="text-black" for="education">Education</label><span class="text-red-500">*</span>
+                    <input id="education" placeholder="your highest education" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="occupation">Occupation</label><span class="text-red-500">*</span>
+                    <input id="occupation" placeholder="your occupation" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+
+                <div class="flex-1">
+                    <label class="text-black" for="resident">Resident</label><span class="text-red-500">*</span>
+                    <input id="resident" placeholder="resident" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+            </div>
+
+            <div class="mt-4 flex flex-row space-x-2">
+                <div class="flex-1">
+                    <label class="text-black" for="religion">Religion</label><span class="text-red-500">*</span>
+                    <input id="religion" placeholder="religion" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="category">Category</label><span class="text-red-500">*</span>
+                    <select id="category" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1">
+                        <option value="">category</option>
+                        <option value="general">General</option>
+                        <option value="obc">OBC</option>
+                        <option value="scst">SC / STC</option>
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="mobile-number">Mobile Number</label><span class="text-red-500">*</span>
+                    <input id="mobile-number" name="mobile-number" placeholder="10 digit mobile Number" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" pattern="\d{10}" maxlength="10" required title="Mobile number must be 10 digits">
+                </div>
+            </div>
+            <div class="mt-4 flex justify-end">
+                <button id="add-member-button" class="bg-white text-black rounded-md border-gray-300 text-sm px-4 py-2 hover:bg-sky-50 border shadow-sm" type="button">Add Member</button>
+            </div>
+            <div class="mt-4 flex justify-center">
+                <button id="submit-button" type="submit" class="inline-block py-2 px-6 rounded-md bg-[#0EA5E9] hover:bg-white hover:text-[#0EA5E9] focus:text-[#0EA5E9] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <table id="members-table" class="mt-4 w-full bg-white rounded-lg shadow-sm border-separate border border-sky-500 ...">
+        <thead>
+            <tr class="text-sky-500 ">
+                <th class="border border-sky-500">HoF</th>
+                <th class="border border-sky-500">Name</th>
+                <th class="border border-sky-500">Age</th>
+                <th class="border border-sky-500">Gender</th>
+                <th class="border border-sky-500">Relation</th>
+            </tr>
+        </thead>
+        <tbody id="members-table-body">
+            <!-- Member rows will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        function calculateAge(dob) {
+            const birthDate = new Date(dob);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function validateForm() {
+            const name = document.getElementById('main-name').value;
+            const dob = document.getElementById('dob').value;
+            const gender = document.getElementById('gender').value;
+            const adhar = document.getElementById('adhar').value;
+            const education = document.getElementById('education').value;
+            const occupation = document.getElementById('occupation').value;
+            const resident = document.getElementById('resident').value;
+            const religion = document.getElementById('religion').value;
+            const category = document.getElementById('category').value;
+            const mobile = document.getElementById('mobile-number').value;
+
+            if (!name || !dob || !gender || !adhar || !education || !occupation || !resident || !religion || !category || !mobile) {
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById('add-member-button').addEventListener('click', function () {
+            if (validateForm()) {
+                const name = document.getElementById('main-name').value;
+                const dob = document.getElementById('dob').value;
+                const gender = document.getElementById('gender').value;
+                const age = calculateAge(dob);
+                const relationOptions = ['Self', 'Spouse', 'Mother', 'Grandmother', 'Sister', 'Brother', 'Father', 'Grandfather', 'Son', 'Daughter'];
+                const relation = document.createElement('select');
+                relationOptions.forEach(option => {
+                    const opt = document.createElement('option');
+                    opt.value = option;
+                    opt.textContent = option;
+                    relation.appendChild(opt);
+                });
+
+                const membersTableBody = document.getElementById('members-table-body');
+                const newRow = membersTableBody.insertRow();
+
+                const hofCell = newRow.insertCell();
+                const hofRadio = document.createElement('input');
+                hofRadio.type = 'radio';
+                hofRadio.name = 'hof';
+                hofCell.appendChild(hofRadio);
+
+                newRow.insertCell().innerText = name;
+                newRow.insertCell().innerText = age;
+                newRow.insertCell().innerText = gender;
+                const relationCell = newRow.insertCell();
+                relationCell.appendChild(relation);
+
+                document.getElementById('main-form').reset();
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+
+        document.getElementById('main-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const hofRadioButtons = document.querySelectorAll('input[name="hof"]');
+            let hofSelected = false;
+            let hofDetails = {};
+
+            hofRadioButtons.forEach(radio => {
+                if (radio.checked) {
+                    hofSelected = true;
+                    const row = radio.closest('tr');
+                    hofDetails = {
+                        name: row.cells[1].innerText,
+                        age: row.cells[2].innerText,
+                        gender: row.cells[3].innerText,
+                        relation: row.cells[4].querySelector('select').value
+                    };
+                }
+            });
+
+            if (!hofSelected) {
+                alert('Please select a Head of Family (HoF).');
+                return;
+            }
+
+            // Optionally, send the HoF details to the server or store in a hidden form field
+            // For example:
+            // document.getElementById('hof-name').value = hofDetails.name;
+
+            alert('Form submitted successfully!');
+            document.getElementById('main-form').reset();
+            document.getElementById('members-table-body').innerHTML = ''; // Clear the members table
+        });
+    </script>
+</body>
+
+</html>

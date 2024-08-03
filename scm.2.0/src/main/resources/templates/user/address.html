@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+    <title>CreateJanAdhaar</title>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class=" mt-4  text-center">
+        <h2 class=" font-bold  text-lg text-blue-950">New Enrollment Form</h2>
+    </div>
+    <form id="main-form" data-th-action="@{'/user/JanCardd'}" th:object="${userForm}" method="post">
+        <div class=" mx-px flex flex-col bg-sky-50 rounded-lg p-4 shadow-sm">
+
+            <h3 class=" italic text-lg text-sky-500">Address Details</h3>
+
+            <div class="mt-4 flex flex-row space-x-2">
+                <div class="flex-1">
+                    <label class="text-black" for="address-line-1">Address line 1</label><span class="text-red-500">*</span>
+                    <input id="address-line-1" placeholder="address line 1"
+                        class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+
+                <div class="flex-1">
+                    <label class="text-black" for="address-line-2">Address line 2</label>
+                    <input id="address-line-2" placeholder="address line 2"
+                        class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+
+            </div>
+
+            <div class="mt-4 flex flex-row space-x-2">
+                <div class="flex-1">
+                    <label class="text-black" for="house-no">House No</label><span class="text-red-500">*</span>
+                    <input id="house-no" placeholder="house no"
+                        class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="ward-no">Ward No</label><span class="text-red-500">*</span>
+                    <input id="ward-no" placeholder="ward no"
+                        class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+
+                <div class="flex-1">
+                    <label class="text-black" for="block">Block</label><span class="text-red-500">*</span>
+                    <input id="block" placeholder="block"
+                        class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+
+            </div>
+
+            <div class="mt-4 flex flex-row space-x-2">
+                <div class="flex-1">
+                    <label class="text-black" for="district">District</label>
+                    <input id="district" placeholder="district"
+                        class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+                <div class="flex-1">
+                    <label class="text-black" for="city">City</label><span class="text-red-500">*</span>
+                    <select id="city" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1">
+                        <option value="">Your city</option>
+                        <optgroup label="Rajasthan">
+                            <option value="Ajmer">Ajmer</option>
+                            <option value="Alwar">Alwar</option>
+                            <option value="Banswara">Banswara</option>
+                            <option value="Baran">Baran</option>
+                            <option value="Barmer">Barmer</option>
+                            <option value="Bharatpur">Bharatpur</option>
+                            <option value="Bhilwara">Bhilwara</option>
+                            <option value="Bikaner">Bikaner</option>
+                            <option value="Bundi">Bundi</option>
+                            <option value="Chittorgarh">Chittorgarh</option>
+                            <option value="Churu">Churu</option>
+                            <option value="Dausa">Dausa</option>
+                            <option value="Dholpur">Dholpur</option>
+                            <option value="Dungarpur">Dungarpur</option>
+                            <option value="Hanumangarh">Hanumangarh</option>
+                            <option value="Jaipur">Jaipur</option>
+                            <option value="Jaisalmer">Jaisalmer</option>
+                            <option value="Jalore">Jalore</option>
+                            <option value="Jhalawar">Jhalawar</option>
+                            <option value="Jhunjhunu">Jhunjhunu</option>
+                            <option value="Jodhpur">Jodhpur</option>
+                            <option value="Karauli">Karauli</option>
+                            <option value="Kota">Kota</option>
+                            <option value="Nagaur">Nagaur</option>
+                            <option value="Pali">Pali</option>
+                            <option value="Pratapgarh">Pratapgarh</option>
+                            <option value="Rajsamand">Rajsamand</option>
+                            <option value="Sawai Madhopur">Sawai Madhopur</option>
+                            <option value="Sikar">Sikar</option>
+                            <option value="Sirohi">Sirohi</option>
+                            <option value="Tonk">Tonk</option>
+                            <option value="Udaipur">Udaipur</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="flex-1">
+                    <label class="text-black" for="pin-code">Pin Code</label><span class="text-red-500">*</span>
+                    <input id="pin-code" placeholder="pin code"
+                        class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                </div>
+
+            </div>
+ <div class="mt-4 flex justify-center">
+        <button
+           type="submit" class="inline-block py-2 px-6 rounded-md  bg-[#0EA5E9] hover:bg-white hover:text-[#0EA5E9] focus:text-[#0EA5E9] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200">
+            Submit
+        </button>
+    </div>
+        </div>
+	
+    </form>
+
+   
+   
+
+    
+</body>
+
+</html>

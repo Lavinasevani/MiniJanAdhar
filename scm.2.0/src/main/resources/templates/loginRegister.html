@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+	tailwind.config = {
+		theme : {
+			extend : {
+				colors : {
+					clifford : '#da373d',
+				}
+			}
+		}
+	}
+</script>
+<title>Register</title>
+
+</head>
+
+<body>
+
+
+
+	<form data-th-action="@{'/do-register'}" th:object="${userForms}"
+		method="post" class="px-7 h-screen grid justify-center items-center" novalidate>
+		
+		<div class="grid gap-6" id="form">
+		<div th:if="${session.message}" th:insert="~{message::message-box}"></div>
+			<div class="w-full flex gap-6">
+				<input
+					class="capitalize shadow-2xl p-3 ex w-full outline-none focus:border-solid focus:border-[1px] border-[#035ec5] placeholder:text-black"
+					data-th-field="*{name}" type="text" placeholder="name" id="Name"
+					name="Name" required="">
+					
+			</div>
+			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600 px-2 py-2"> Name is Required</p>
+			<div class="grid gap-6 w-full">
+				<input
+					class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+					data-th-field="*{email}" type="Email" placeholder="Email"
+					id="Email" name="email" required="">
+					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-red-600 px-2 py-2"> Correct mail is Required </p>
+					 <input
+					class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+					data-th-field="*{adhar}" type="text" placeholder="Adhaar Number"
+					id="Adhar" name="adhar" required=""> 
+					<p th:if="${#fields.hasErrors('adhar')}" th:errors="*{adhar}" class="text-red-600 px-2 py-2">Aadhar Number must be 12 digits</p>
+					<input
+					class="p-3 shadow-2xl   glass w-full text-black outline-none focus:border-solid focus:border-[1px]border-[#035ec5]"
+					data-th-field="*{dob}" type="date" required="">
+					<p th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" class="text-red-600 px-2 py-2">Date of Birth is Required</p>
+			</div>
+			<div class="flex gap-3">
+				<input
+					class="p-3 glass shadow-2xl  w-full placeholder:text-black outline-none focus:border-solid focus:border-[1px] border-[#035ec5]"
+					data-th-field="*{password}" type="password" placeholder="Password"
+					id="password" name="password" required=""> <input
+					class="p-3 glass shadow-2xl  w-full placeholder:text-black outline-none focus:border-solid focus:border-[1px] border-[#035ec5]"
+					type="password" placeholder="Confirm password" required="">
+					
+			</div>
+			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-red-600 px-2 py-2">Password length should be greater than 6.</p>
+			<div class="flex gap-3">
+				<button
+					class="outline-none glass shadow-2xl w-full p-3 bg-[#ffffff42] hover:border-[#035ec5] hover:border-solid hover:border-[1px] hover:text-[#035ec5] font-bold"
+					type="submit">Register</button>
+				<a
+					class="outline-none glass shadow-2xl w-full p-3 bg-[#ffffff42] hover:border-[#035ec5] hover:border-solid hover:border-[1px] hover:text-[#035ec5] font-bold text-center"
+					th:href="@{/home}">Cancel</a>
+			</div>
+			<div class="flex items-center justify-between mt-4">
+				<span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span> <a
+					class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
+					data-th-href="@{'/login'}">have an account? Log in</a>
+				<span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+			</div>
+		</div>
+
+	</form>
+
+
+
+</body>
+</html>
