@@ -28,34 +28,36 @@
     <div class="mt-4 text-center">
         <h2 class="font-bold text-lg text-blue-950">New Enrollment Form</h2>
     </div>
-    <form id="main-form" data-th-action="@{'/user/JanCard'}" th:object="${userForm}" method="post">
-        <div class="mx-px flex flex-col bg-sky-50 rounded-lg p-4 shadow-sm">
+<form id="main-form" th:action="@{/user/fam/add}" method="post">
 
+
+        <div class="mx-px flex flex-col bg-sky-50 rounded-lg p-4 shadow-sm">
+			<div th:object="${memberInfoForm}">
             <h3 class="italic text-lg text-sky-500">Personal Details</h3>
 
             <div class="mt-4 flex flex-row space-x-2">
                 <div class="flex-1">
                     <label class="text-black" for="name">Name</label><span class="text-red-500">*</span>
-                    <input id="main-name" placeholder="your name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                    <input th:field="*{name}" id="main-name" placeholder="your name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
                 </div>
                 <div class="flex-1">
                     <label class="text-black" for="father-name">Father Name</label><span class="text-red-500">*</span>
-                    <input id="father-name" placeholder="father name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                    <input th:field="*{fName}" id="father-name" placeholder="father name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
                 </div>
                 <div class="flex-1">
                     <label class="text-black" for="mother-name">Mother Name</label><span class="text-red-500">*</span>
-                    <input id="mother-name" placeholder="mother name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                    <input th:field="*{mName}" id="mother-name" placeholder="mother name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
                 </div>
             </div>
 
             <div class="mt-4 flex flex-row space-x-2">
                 <div class="flex-1">
                     <label class="text-black" for="dob">DoB</label><span class="text-red-500">*</span>
-                    <input id="dob" placeholder="Your Date of Birth" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="date">
+                    <input th:field="*{dob}" id="dob" placeholder="Your Date of Birth (dd-MM-yyyy)" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" onfocus="(this.type='date')" onblur="(this.type='text')">
                 </div>
                 <div class="flex-1">
                     <label class="text-black" for="gender">Gender</label><span class="text-red-500">*</span>
-                    <select id="gender" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1">
+                    <select th:field="*{gender}" id="gender" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1">
                         <option value="">Your Gender</option>
                         <option value="female">Female</option>
                         <option value="male">Male</option>
@@ -63,37 +65,41 @@
                     </select>
                 </div>
                 <div class="flex-1">
-                    <label class="text-black" for="adhar">Adhar<span class="text-red-500">*</span></label>
-                    <input id="adhar" name="adhar" placeholder="12 digit adhar Number" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" pattern="\d{12}" maxlength="12" >
+                    <label class="text-black" for="mAdhar">Adhar<span class="text-red-500">*</span></label>
+                    <input th:field="*{mAdhar}" id="mAdhar" name="mAdhar" placeholder="12 digit adhar Number" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" pattern="\d{12}" maxlength="12">
                 </div>
             </div>
+        </div>
+        </div>
 
+        <!-- MemberProfessionForm section -->
+         <div class="mx-px flex flex-col bg-sky-50 rounded-lg p-4 shadow-sm">
+        <div th:object="${memberProfessionForm}">
             <h3 class="mt-4 italic text-lg text-sky-500">Professional Details</h3>
 
             <div class="mt-4 flex flex-row space-x-2">
                 <div class="flex-1">
                     <label class="text-black" for="education">Education</label><span class="text-red-500">*</span>
-                    <input id="education" placeholder="your highest education" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                    <input th:field="*{education}" id="education" placeholder="your highest education" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
                 </div>
                 <div class="flex-1">
                     <label class="text-black" for="occupation">Occupation</label><span class="text-red-500">*</span>
-                    <input id="occupation" placeholder="your occupation" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                    <input th:field="*{occupation}" id="occupation" placeholder="your occupation" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
                 </div>
-
                 <div class="flex-1">
                     <label class="text-black" for="resident">Resident</label><span class="text-red-500">*</span>
-                    <input id="resident" placeholder="resident" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                    <input th:field="*{resident}" id="resident" placeholder="resident" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
                 </div>
             </div>
 
             <div class="mt-4 flex flex-row space-x-2">
                 <div class="flex-1">
                     <label class="text-black" for="religion">Religion</label><span class="text-red-500">*</span>
-                    <input id="religion" placeholder="religion" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                    <input th:field="*{religion}" id="religion" placeholder="religion" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
                 </div>
                 <div class="flex-1">
                     <label class="text-black" for="category">Category</label><span class="text-red-500">*</span>
-                    <select id="category" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1">
+                    <select th:field="*{category}" id="category" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1">
                         <option value="">category</option>
                         <option value="general">General</option>
                         <option value="obc">OBC</option>
@@ -102,23 +108,30 @@
                 </div>
                 <div class="flex-1">
                     <label class="text-black" for="mobile-number">Mobile Number</label><span class="text-red-500">*</span>
-                    <input id="mobile-number" name="mobile-number" placeholder="10 digit mobile Number" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" pattern="\d{10}" maxlength="10" required title="Mobile number must be 10 digits">
+                    <input th:field="*{mobileNumber}" id="mobile-number" name="mobile-number" placeholder="10 digit mobile Number" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" pattern="\d{10}" maxlength="10">
                 </div>
             </div>
-            <div class="mt-4 flex justify-end">
-                <button id="add-member-button" class="bg-white text-black rounded-md border-gray-300 text-sm px-4 py-2 hover:bg-sky-50 border shadow-sm" type="button">Add Member</button>
-            </div>
-            <div class="mt-4 flex justify-center">
-                <button id="submit-button" type="submit" class="inline-block py-2 px-6 rounded-md bg-[#0EA5E9] hover:bg-white hover:text-[#0EA5E9] focus:text-[#0EA5E9] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200">
+        </div>
+
+        <div class="mt-4 flex justify-end">
+            <button type="submit" id="add-member-button" class="bg-white text-black rounded-md border-gray-300 text-sm px-4 py-2 hover:bg-sky-50 border shadow-sm">Add Member</button>
+
+        </div>
+        <div class="mt-4 flex justify-center">
+                <button id="submit-button" type="button" class="inline-block py-2 px-6 rounded-md bg-[#0EA5E9] hover:bg-white hover:text-[#0EA5E9] focus:text-[#0EA5E9] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200">
                     Submit
                 </button>
             </div>
-        </div>
+         </div>
     </form>
 
-    <table id="members-table" class="mt-4 w-full bg-white rounded-lg shadow-sm border-separate border border-sky-500 ...">
+    <div th:if="${session.message}">
+        <p th:text="${session.message.content}" class="text-green-500 text-center mt-4"></p>
+    </div>
+
+    <table id="members-table" class="mt-4 w-full bg-white rounded-lg shadow-sm border-separate border border-sky-500">
         <thead>
-            <tr class="text-sky-500 ">
+            <tr class="text-sky-500">
                 <th class="border border-sky-500">HoF</th>
                 <th class="border border-sky-500">Name</th>
                 <th class="border border-sky-500">Age</th>
@@ -131,51 +144,46 @@
         </tbody>
     </table>
 
-    <script>
-        function calculateAge(dob) {
-            const birthDate = new Date(dob);
-            const today = new Date();
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-            return age;
+  <script>
+    function calculateAge(dob) {
+        const birthDate = new Date(dob);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
         }
+        return age;
+    }
 
-        function validateForm() {
-            const name = document.getElementById('main-name').value;
-            const dob = document.getElementById('dob').value;
-            const gender = document.getElementById('gender').value;
-            const adhar = document.getElementById('adhar').value;
-            const education = document.getElementById('education').value;
-            const occupation = document.getElementById('occupation').value;
-            const resident = document.getElementById('resident').value;
-            const religion = document.getElementById('religion').value;
-            const category = document.getElementById('category').value;
-            const mobile = document.getElementById('mobile-number').value;
+    function validateForm() {
+        const name = document.getElementById('main-name').value;
+        const dob = document.getElementById('dob').value;
+        const gender = document.getElementById('gender').value;
+        const adhar = document.getElementById('mAdhar').value;
+        const education = document.getElementById('education').value;
+        const occupation = document.getElementById('occupation').value;
+        const resident = document.getElementById('resident').value;
+        const religion = document.getElementById('religion').value;
+        const category = document.getElementById('category').value;
+        const mobile = document.getElementById('mobile-number').value;
 
-            if (!name || !dob || !gender || !adhar || !education || !occupation || !resident || !religion || !category || !mobile) {
-                return false;
+        return name && dob && gender && adhar && education && occupation && resident && religion && category && mobile;
+    }
+
+    function submitFormViaAjax(formData) {
+        fetch('/user/fam/add', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json',
             }
-            return true;
-        }
-
-        document.getElementById('add-member-button').addEventListener('click', function () {
-            if (validateForm()) {
-                const name = document.getElementById('main-name').value;
-                const dob = document.getElementById('dob').value;
-                const gender = document.getElementById('gender').value;
-                const age = calculateAge(dob);
-                const relationOptions = ['Self', 'Spouse', 'Mother', 'Grandmother', 'Sister', 'Brother', 'Father', 'Grandfather', 'Son', 'Daughter'];
-                const relation = document.createElement('select');
-                relationOptions.forEach(option => {
-                    const opt = document.createElement('option');
-                    opt.value = option;
-                    opt.textContent = option;
-                    relation.appendChild(opt);
-                });
-
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Member added successfully!');
+                
                 const membersTableBody = document.getElementById('members-table-body');
                 const newRow = membersTableBody.insertRow();
 
@@ -183,54 +191,72 @@
                 const hofRadio = document.createElement('input');
                 hofRadio.type = 'radio';
                 hofRadio.name = 'hof';
+                hofRadio.disabled = !(data.age > 18 && data.gender === 'female');  // Enable only if age > 18 and female
                 hofCell.appendChild(hofRadio);
 
-                newRow.insertCell().innerText = name;
-                newRow.insertCell().innerText = age;
-                newRow.insertCell().innerText = gender;
+                newRow.insertCell().innerText = data.name;
+                newRow.insertCell().innerText = data.age;
+                newRow.insertCell().innerText = data.gender;
                 const relationCell = newRow.insertCell();
-                relationCell.appendChild(relation);
+                const relationSelect = document.createElement('select');
+                const relationOptions = ['Self', 'Spouse', 'Mother', 'Grandmother', 'Sister', 'Brother', 'Father', 'Grandfather', 'Son', 'Daughter'];
+                relationOptions.forEach(option => {
+                    const opt = document.createElement('option');
+                    opt.value = option;
+                    opt.textContent = option;
+                    relationSelect.appendChild(opt);
+                });
+                relationCell.appendChild(relationSelect);
 
                 document.getElementById('main-form').reset();
             } else {
-                alert('Please fill in all required fields.');
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error adding the member.');
+        });
+    }
+
+    document.getElementById('add-member-button').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        if (validateForm()) {
+            const formData = new FormData(document.getElementById('main-form'));
+
+            // Calculate age and add it to the formData
+            const dob = formData.get('dob');
+            const age = calculateAge(dob);
+            formData.append('age', age);
+
+            submitFormViaAjax(formData);
+        } else {
+            alert('Please fill in all required fields.');
+        }
+    });
+
+    document.getElementById('submit-button').addEventListener('click', function (event) {
+        const hofRadioButtons = document.querySelectorAll('input[name="hof"]');
+        let selectedCount = 0;
+
+        hofRadioButtons.forEach(radio => {
+            if (radio.checked) {
+                selectedCount++;
             }
         });
 
-        document.getElementById('main-form').addEventListener('submit', function (event) {
+        if (selectedCount !== 1) {
+            alert('Please select exactly one Head of Family (HoF).');
             event.preventDefault();
+            return;
+        }
 
-            const hofRadioButtons = document.querySelectorAll('input[name="hof"]');
-            let hofSelected = false;
-            let hofDetails = {};
+        alert('Family enrolled successfully!');
+    });
+</script>
+  
 
-            hofRadioButtons.forEach(radio => {
-                if (radio.checked) {
-                    hofSelected = true;
-                    const row = radio.closest('tr');
-                    hofDetails = {
-                        name: row.cells[1].innerText,
-                        age: row.cells[2].innerText,
-                        gender: row.cells[3].innerText,
-                        relation: row.cells[4].querySelector('select').value
-                    };
-                }
-            });
-
-            if (!hofSelected) {
-                alert('Please select a Head of Family (HoF).');
-                return;
-            }
-
-            // Optionally, send the HoF details to the server or store in a hidden form field
-            // For example:
-            // document.getElementById('hof-name').value = hofDetails.name;
-
-            alert('Form submitted successfully!');
-            document.getElementById('main-form').reset();
-            document.getElementById('members-table-body').innerHTML = ''; // Clear the members table
-        });
-    </script>
 </body>
 
 </html>

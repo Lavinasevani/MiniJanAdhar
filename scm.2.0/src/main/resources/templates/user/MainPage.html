@@ -12,7 +12,6 @@
   <title>MainPage</title>
 </head>
 
-
 <body>
 <h1>MINI JanAdhaar</h1>
   <nav>
@@ -30,7 +29,12 @@
 
   <!-- Dropdown Structure -->
   <ul id="profile-dropdown" class="dropdown-content">
-    <li><a href="#profile"><i class="material-icons">account_circle</i>Profile</a></li>
+     <li>
+                    <a href="#" class="dropdown-trigger" data-target="profile-dropdown">
+
+                        <span th:text="${loggedInUser.email}"></span>
+                    </a>
+                </li>
     <li><a href="#change-password"><i class="material-icons">lock</i>Change Password</a></li>
     <li><a th:href="@{'/do-logout'}"><i class="material-icons">exit_to_app</i>Logout</a></li>
   </ul>
@@ -48,7 +52,7 @@
    <div class="card">
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">Create JanAdhaar <i class="material-icons right">more_vert</i></span>
-      <p><a th:href="@{'/user/createJanPage'}">JanAadhaar is for every Resident of India.</a></p>
+      <p><a th:href="@{/user/fam/addLink}">JanAadhaar is for every Resident of India.</a></p>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">Create Janadhar<i class="material-icons right">close</i></span>

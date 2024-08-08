@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -30,6 +30,7 @@ public class PageController {
 		System.out.println("Dummy home page fired");
 		return "index";
 	}
+//	process of registration -> Data saved in db
 	@RequestMapping("/loginRegister")
 	public String login(Model model) {
 		UserForms userForms = new UserForms();
@@ -37,6 +38,7 @@ public class PageController {
 		System.out.println("Dummy Register page fired");
 		return "/loginRegister";
 	}
+	// validate user 
 	@RequestMapping("/login")
 	public String loginpage() {
 		System.out.println("Dummy Login page fired");

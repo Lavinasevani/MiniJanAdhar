@@ -47,8 +47,7 @@ public class User implements UserDetails{
     private Provider provider = Provider.SELF;
     private String providerUserId;
     
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , fetch = FetchType.LAZY , orphanRemoval = true)
-    private List<Family> family = new ArrayList<>();
+    
     
     
 	public Long getId() {

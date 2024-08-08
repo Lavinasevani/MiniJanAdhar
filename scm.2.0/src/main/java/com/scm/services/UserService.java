@@ -9,6 +9,7 @@ public interface UserService {
     User saveUser(User user);
     Optional<User> getUserById(Long id);
     Optional<User> updateUser(User user);
+    User getUserByEmail(String email);
     void deleteUser(Long id);
     boolean isUserExist(Long userId);
     boolean isUserExistByUserName(String email);
