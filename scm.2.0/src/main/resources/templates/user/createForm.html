@@ -53,7 +53,7 @@
             <div class="mt-4 flex flex-row space-x-2">
                 <div class="flex-1">
                     <label class="text-black" for="dob">DoB</label><span class="text-red-500">*</span>
-                    <input th:field="*{dob}" id="dob" placeholder="Your Date of Birth (dd-MM-yyyy)" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" onfocus="(this.type='date')" onblur="(this.type='text')">
+                    <input th:field="*{dob}" id="dob" placeholder="(YYYY-MM-DD)" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text" onfocus="(this.type='date')" onblur="(this.type='text')">
                 </div>
                 <div class="flex-1">
                     <label class="text-black" for="gender">Gender</label><span class="text-red-500">*</span>
@@ -117,19 +117,14 @@
             <button type="submit" id="add-member-button" class="bg-white text-black rounded-md border-gray-300 text-sm px-4 py-2 hover:bg-sky-50 border shadow-sm">Add Member</button>
 
         </div>
-        <div class="mt-4 flex justify-center">
-                <button id="submit-button" type="button" class="inline-block py-2 px-6 rounded-md bg-[#0EA5E9] hover:bg-white hover:text-[#0EA5E9] focus:text-[#0EA5E9] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200">
-                    Submit
-                </button>
-            </div>
-         </div>
+        
     </form>
 
     <div th:if="${session.message}">
         <p th:text="${session.message.content}" class="text-green-500 text-center mt-4"></p>
     </div>
 
-    <table id="members-table" class="mt-4 w-full bg-white rounded-lg shadow-sm border-separate border border-sky-500">
+    <table id="members-table" class="mt-4 w-full bg-white rounded-lg shadow-sm border-separate border border-sky-500 table-fixed">
         <thead>
             <tr class="text-sky-500">
                 <th class="border border-sky-500">HoF</th>
@@ -139,22 +134,32 @@
                 <th class="border border-sky-500">Relation</th>
             </tr>
         </thead>
-        <tbody id="members-table-body">
+        <tbody id="members-table-body" style="
+    text-align: center">
             <!-- Member rows will be added here dynamically -->
         </tbody>
     </table>
+    <div class="mt-4 flex justify-center">
+                <button id="submit-button" type="button" class="inline-block py-2 px-6 rounded-md bg-[#0EA5E9] hover:bg-white hover:text-[#0EA5E9] focus:text-[#0EA5E9] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200">
+                    Submit
+                </button>
+            </div>
+         </div>
 
   <script>
-    function calculateAge(dob) {
-        const birthDate = new Date(dob);
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age;
-    }
+  function calculateAge(dob) {
+	    // Convert date string in YYYY-MM-DD format to a Date object
+	    const parts = dob.split("-");
+	    const birthDate = new Date(parts[0], parts[1] - 1, parts[2]); // Month is 0-based
+	    const today = new Date();
+	    let age = today.getFullYear() - birthDate.getFullYear();
+	    const m = today.getMonth() - birthDate.getMonth();
+	    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+	        age--;
+	    }
+	    return age;
+	}
+
 
     function validateForm() {
         const name = document.getElementById('main-name').value;

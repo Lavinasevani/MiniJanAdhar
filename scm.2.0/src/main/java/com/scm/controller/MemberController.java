@@ -74,11 +74,11 @@ public class MemberController {
         memberService.saveMemberInfo(memberInfo);
         memberService.saveMemberProfession(memberProfession);
 
-        Message mess = Message.builder()
-                .content("Member Saved !!")
-                .type(messageType.blue)
-                .build();
-        session.setAttribute("message", mess);
+//        //Message mess = Message.builder()
+//                .content("Member Saved !!")
+//                .type(messageType.blue)
+//                .build();
+//        session.setAttribute("message", mess);
 
         return ResponseEntity.ok(Map.of(
                 "success", true,
@@ -90,23 +90,29 @@ public class MemberController {
         ));
     }
 
-
     private int calculateAge(String dob) {
-        // Add your age calculation logic here
-        // This is a placeholder
+        // Ensure the date format is YYYY-MM-DD
         if (dob == null || dob.isEmpty()) return 0;
+        
         String[] parts = dob.split("-");
-        int year = Integer.parseInt(parts[2]);
-        int month = Integer.parseInt(parts[1]) - 1;
-        int day = Integer.parseInt(parts[0]);
+        int year = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]) - 1; // Java months are 0-based
+        int day = Integer.parseInt(parts[2]);
+        
         java.util.Calendar birthDate = java.util.Calendar.getInstance();
         birthDate.set(year, month, day);
-        int age = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR) - birthDate.get(java.util.Calendar.YEAR);
-        if (java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) < birthDate.get(java.util.Calendar.MONTH) ||
-            (java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) == birthDate.get(java.util.Calendar.MONTH) &&
-            java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH) < birthDate.get(java.util.Calendar.DAY_OF_MONTH))) {
+        
+        java.util.Calendar today = java.util.Calendar.getInstance();
+        int age = today.get(java.util.Calendar.YEAR) - birthDate.get(java.util.Calendar.YEAR);
+        
+        // Adjust age if the birthday hasn't occurred yet this year
+        if (today.get(java.util.Calendar.MONTH) < birthDate.get(java.util.Calendar.MONTH) ||
+            (today.get(java.util.Calendar.MONTH) == birthDate.get(java.util.Calendar.MONTH) &&
+             today.get(java.util.Calendar.DAY_OF_MONTH) < birthDate.get(java.util.Calendar.DAY_OF_MONTH))) {
             age--;
         }
+        
         return age;
     }
+
 }
