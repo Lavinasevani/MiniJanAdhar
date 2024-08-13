@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.scm.entities.User;
+import com.scm.forms.AddressForm;
 import com.scm.forms.UserForms;
 import com.scm.helper.Message;
 import com.scm.helper.messageType;
@@ -53,12 +54,18 @@ public class PageController {
 	public String cardJanpage() {
 		System.out.println("Dummy address page fired");
 		return "/user/address";
-	}
-	@RequestMapping("/user/JanCardd")
-	public String cardJanpagee() {
-		System.out.println("Dummy Payment page fired");
+	} 
+
+	@RequestMapping("/user/pay")
+	public String payPage() {
+		System.out.println("Dummy address page fired");
 		return "/user/pay";
 	}
+	   
+	   
+
+
+
 	@RequestMapping("/user/confirm-janCard")
 	public String cardJan() {
 		System.out.println(" Dummy confirm-janCard page fired");
@@ -112,7 +119,11 @@ public class PageController {
 	    public String mainPage() {
 	        return "/user/MainPage"; 
 	    }
-
+	    @GetMapping("/user/pay")
+	    public String showPayForm() {
+	        //model.addAttribute("addressForm", new AddressForm()); // Make sure this matches the object you're using in the form
+	        return "/user/pay";
+	    }
 	@RequestMapping(value="/do-login" , method=RequestMethod.POST)
 	public String processLogin() {
 		System.out.println("Data coming from login");

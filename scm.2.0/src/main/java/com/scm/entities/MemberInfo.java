@@ -3,7 +3,7 @@ package com.scm.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "bsdc_Info") // Correct table name
+@Table(name = "finali_Info") // Correct table name
 public class MemberInfo {
 
     @Id
@@ -16,6 +16,9 @@ public class MemberInfo {
     private String dob; // Format: dd-MM-yyyy
     private String gender;
     private String mAdhar;
+
+    @ManyToOne 
+    private User user;
 
     // Getters and Setters
     public Long getId() {
@@ -74,9 +77,22 @@ public class MemberInfo {
         this.mAdhar = mAdhar;
     }
 
-    @Override
+  
+
+
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
     public String toString() {
         return "MemberInfo [id=" + id + ", name=" + name + ", fName=" + fName + ", mName=" + mName + ", dob=" + dob
                 + ", gender=" + gender + ", mAdhar=" + mAdhar + "]";
     }
+
+	
 }

@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -123,10 +124,10 @@
     <div th:if="${session.message}">
         <p th:text="${session.message.content}" class="text-green-500 text-center mt-4"></p>
     </div>
-
+<!--    Family members enrollment   --> 
     <table id="members-table" class="mt-4 w-full bg-white rounded-lg shadow-sm border-separate border border-sky-500 table-fixed">
         <thead>
-            <tr class="text-sky-500">
+            <tr class="text-sky-500" data-member-id="123">
                 <th class="border border-sky-500">HoF</th>
                 <th class="border border-sky-500">Name</th>
                 <th class="border border-sky-500">Age</th>
@@ -147,6 +148,7 @@
          </div>
 
   <script>
+  // ###################### Add Member ############################
   function calculateAge(dob) {
 	    // Convert date string in YYYY-MM-DD format to a Date object
 	    const parts = dob.split("-");
@@ -240,25 +242,42 @@
             alert('Please fill in all required fields.');
         }
     });
+    // ###################### Submit Family ############################
+    $(document).ready(function () {
+            $('#submit-button').click(function () {
+                var familyMembers = [];
+                $('#members-table-body tr').each(function () {
+                    var row = $(this);
+                    var hofStatus = row.find('input[type="radio"]').is(':checked') ? 'Yes' : 'No';
+                    var memberName = row.find('td:nth-child(2)').text(); // Assuming name is in the 2nd column
+                    var memberAge = row.find('td:nth-child(3)').text();  // Assuming age is in the 3rd column
+                    var memberGender = row.find('td:nth-child(4)').text(); // Assuming gender is in the 4th column
+                    var relationWithHof = row.find('td:nth-child(5) select').val();
 
-    document.getElementById('submit-button').addEventListener('click', function (event) {
-        const hofRadioButtons = document.querySelectorAll('input[name="hof"]');
-        let selectedCount = 0;
+                    familyMembers.push({
+                        hofStatus: hofStatus,
+                        memberName: memberName,
+                        memberAge: memberAge,
+                        memberGender: memberGender,
+                        relationWithHof: relationWithHof
+                    });
+                });
 
-        hofRadioButtons.forEach(radio => {
-            if (radio.checked) {
-                selectedCount++;
-            }
+                $.ajax({
+                    url: '/saveFamily',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(familyMembers),
+                    success: function (response) {
+                        alert('Family members saved successfully!');
+                        window.location.href = '/user/address';
+                    },
+                    error: function (xhr, status, error) {
+                        alert('An error occurred: ' + error);
+                    }
+                });
+            });
         });
-
-        if (selectedCount !== 1) {
-            alert('Please select exactly one Head of Family (HoF).');
-            event.preventDefault();
-            return;
-        }
-
-        alert('Family enrolled successfully!');
-    });
 </script>
   
 

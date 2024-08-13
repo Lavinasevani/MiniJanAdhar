@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface MemberService {
 
     MemberInfo saveMemberInfo(MemberInfo memberInfo);
-    
+
     Optional<MemberInfo> getMemberInfoById(Long id);
 
     Optional<MemberInfo> updateMemberInfo(MemberInfo memberInfo) throws ResourceNotFoundException;
@@ -28,4 +28,7 @@ public interface MemberService {
     void deleteMemberProfession(Long id) throws ResourceNotFoundException;
 
     List<MemberProfession> getAllMemberProfession();
+
+    // New method to save both MemberInfo and MemberProfession
+    void saveMember(MemberInfo memberInfo, MemberProfession memberProfession);
 }

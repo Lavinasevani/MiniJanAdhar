@@ -3,17 +3,23 @@ package com.scm.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "bsdc_Prof")
+@Table(name = "final_Prof")
 public class MemberProfession {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String education;
     private String occupation;
     private String resident;
     private String religion;
     private String category;
     private String mobileNumber;
+
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private MemberInfo memberInfo;
 
     // Getters and Setters
     public Long getId() {
@@ -70,6 +76,14 @@ public class MemberProfession {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public MemberInfo getMemberInfo() {
+        return memberInfo;
+    }
+
+    public void setMemberInfo(MemberInfo memberInfo) {
+        this.memberInfo = memberInfo;
     }
 
     @Override

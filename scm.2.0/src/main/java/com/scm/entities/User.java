@@ -17,7 +17,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +41,9 @@ public class User implements UserDetails{
     private String adhar;
     private String dob;
     
+    
+    
+    
     //information
     private boolean enable = true;
     private boolean emailverified = false;
@@ -47,7 +52,7 @@ public class User implements UserDetails{
     private Provider provider = Provider.SELF;
     private String providerUserId;
     
-    
+
     
     
 	public Long getId() {
