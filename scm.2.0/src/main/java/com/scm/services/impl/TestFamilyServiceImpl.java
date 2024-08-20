@@ -35,10 +35,27 @@ public class TestFamilyServiceImpl implements TestFamilyService {
         // For simplicity, using current timestamp.
         return System.currentTimeMillis();
     }
+    @Override
     public Long getCurrentFamilyId() {
-        // Retrieve the most recently saved family ID
-        TestFamily latestFamily = testFamilyRepository.findTopByOrderByFamilyIdDesc();
-        return latestFamily != null ? latestFamily.getFamilyId() : null;
+        TestFamily latestEnroll = testFamilyRepository.findTopByOrderByIdDesc();
+        return latestEnroll != null ? latestEnroll.getId() : null; // Return the 'id' field
     }
+    @Override
+    public Long getCurrentEnrollId() {
+        TestFamily latestEnroll = testFamilyRepository.findTopByOrderByIdDesc();
+        return latestEnroll != null ? latestEnroll.getFamilyId() : null; // Return the 'familyId' field
+    }
+    @Override
+    public TestFamily getTestFamilyById(Long familyId) {
+        return testFamilyRepository.findById(familyId)
+                .orElse(null); // Return the TestFamily or null if not found
+    }
+    
+    @Override
+    public List<TestFamily> getMembersByFamilyId(Long familyId) {
+        return testFamilyRepository.findByFamilyId(familyId);
+    }
+
+    
 }
 

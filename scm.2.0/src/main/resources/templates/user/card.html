@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<title>Jan_Adhaar_Card</title>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+    </style>
+<style type="text/css">
+* {
+	margin: 1px;
+	padding: 0;
+	text-indent: 0;
+}
+
+.s1 {
+	color: black;
+	font-family: Calibri, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 12pt;
+}
+
+.s2 {
+	color: black;
+	font-family: Calibri, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 11pt;
+}
+
+.s3 {
+	color: black;
+	font-family: Calibri, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: none;
+	font-size: 10pt;
+}
+
+.s4 {
+	color: black;
+	font-family: Calibri, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 8pt;
+}
+
+.s5 {
+	color: black;
+	font-family: Calibri, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 10pt;
+}
+
+p {
+	color: black;
+	font-family: Calibri, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 8pt;
+	margin: 0pt;
+}
+
+li {
+	display: block;
+}
+
+table, tbody {
+	vertical-align: top;
+	overflow: visible;
+	margin: 2px;
+}
+</style>
+</head>
+<body>
+	<h1 class="text-6xl font-sans my-6">MINI JanAdhaar</h1>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo">Aurionpro</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a th:href="@{'/user/mainPage'}"><i
+						class="material-icons">home</i></a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="mx-5 my-6 mr-14" id="pdfContent">
+		<table style="border-collapse: collapse; margin-left: 6.376pt"
+			cellspacing="0">
+			<tr style="height: 77pt">
+				<td colspan="6"
+					style="width: 90%; margin-left: auto; margin-right: auto; border: 1pt solid;">
+					<p class="s1"
+						style="padding-top: 3pt; text-indent: 0pt; text-align: center;">
+						GOVERNMENT OF RAJASTHAN</p>
+					<p class="s2"
+						style="padding-top: 1pt; text-indent: 27pt; text-align: center;">
+						JAN ADHAAR CARD PROVISIONALLY ISSUED</p>
+					<p class="s3"
+						style="padding-top: 3pt; text-indent: 0pt; line-height: 12pt; text-align: center;">
+						[SUBJECT TO VERIFICATION AND APPROVAL BY AUTHORITIES]</p>
+					<p class="s3"
+						style="text-indent: 0pt; line-height: 12pt; text-align: center;">
+						[Please take a copy of this receipt]</p>
+				</td>
+			</tr>
+
+			<tr style="height: 77pt">
+				<td colspan="6"
+					style="width: 90%; margin-left: auto; margin-right: auto; border: 1pt solid;">
+					<p class="s4"
+						style="padding-top: 1pt; padding-right: 47pt; text-indent: 0pt; text-align: right;">
+						issued Date : <b
+							th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}"></b>
+					</p>
+					<p class="s3"
+						style="padding-top: 1pt; padding-left: 4pt; text-indent: 0pt; line-height: 12pt; text-align: left;">
+						To,</p>
+					<p class="s3"
+						style="padding-left: 4pt; text-indent: 0pt; line-height: 12pt; text-align: left;">
+						The Authority Concerned</p>
+					<p class="s3"
+						style="padding-left: 4pt; text-indent: 0pt; line-height: 12pt; text-align: left;">
+						Please include the following family member in the Jan Aadhaar card
+						details as per the information provided below:</p>
+					<p style="padding-top: 2pt; text-indent: 0pt; text-align: left">
+						<br />
+					</p>
+
+					<p class="s3"
+						style="padding-top: 8pt; padding-left: 4pt; padding-right: 361pt; text-indent: 0pt; line-height: 132%; text-align: left;">
+						Enrollment By : <b
+							th:text="${loggedInUser.email != null} ? ${loggedInUser.email} : 'loading..'"></b>
+
+					</p>
+					<p class="s3"
+						style="padding-top: 8pt; padding-left: 4pt; padding-right: 361pt; text-indent: 0pt; line-height: 132%; text-align: left;">
+						Enrollment Number : <b><span th:text="${familyNumber}"></span></b>
+
+					</p> <!-- <p>Your Family ID: <span th:text="${familyId}"></span></p> -->
+
+					<p class="s3"
+						style="padding-top: 8pt; padding-left: 4pt; padding-right: 361pt; text-indent: 0pt; line-height: 132%; text-align: left;">
+						Name of Family Head (HoF): <b th:text="${hofName != null && !hofName.isEmpty() ? hofName : 'Loading....'}"></b>
+					</p>
+
+
+					
+					<p class="s3"
+						style="padding-top: 8pt; padding-left: 4pt; padding-right: 361pt; text-indent: 0pt; line-height: 132%; text-align: left;">
+						Address : <b>loading... </b>
+					</p>
+					<p class="s4"
+						style="padding-top: 1pt; text-indent: 0pt; text-align: left;">
+						City: <b
+							th:text="${address != null && address.city != null ? address.city : 'N/A'}"></b>
+					</p>
+
+					<p class="s5"
+						style="padding-left: 113pt; text-indent: 0pt; line-height: 12pt; text-align: left;">
+						xxxxxx(PINCODE)</p>
+
+					<p class="s3"
+						style="padding-top: 3pt; padding-left: 4pt; text-indent: 0pt; text-align: left;">
+						Toll Free Number : 1800 180 6127</p>
+				</td>
+			</tr>
+
+			<tr style="height: 20pt">
+				<td style="width: 15%; border: 1pt solid;">
+					<p class="s5"
+						style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; text-align: center;">
+						Member Name</p>
+				</td>
+				<td style="width: 15%; border: 1pt solid;">
+					<p class="s5"
+						style="padding-top: 1pt; text-indent: 0pt; text-align: center">
+						Relation with HoF</p>
+				</td>
+				<td style="width: 15%; border: 1pt solid;">
+					<p class="s5"
+						style="padding-top: 1pt; text-indent: 0pt; text-align: center;">
+						Gender</p>
+				</td>
+				<td style="width: 15%; border: 1pt solid;">
+					<p class="s5"
+						style="padding-top: 1pt; text-indent: 0pt; text-align: center;">
+						Age</p>
+				</td>
+				<td style="width: 20%; border: 1pt solid;">
+					<p class="s5"
+						style="padding-top: 1pt; text-indent: 0pt; text-align: center;">
+						Hof Status</p>
+				</td>
+				
+			</tr>
+
+			<tr th:each="member : ${familyMembers}" style="height: 10pt">
+				<td style="width: 15%; border: 1pt solid; height: 10pt;">
+					<p class="s3"
+						style="padding-top: 4pt; padding-left: 10pt; text-indent: 0pt; text-align: left;">
+						<span
+							th:text="${member.memberName != null ? member.memberName : 'N/A'}"></span>
+					</p>
+				</td>
+				<td style="width: 15%; border: 1pt solid; height: 10pt;">
+					<p class="s3"
+						style="padding-top: 4pt; padding-left: 10pt; text-indent: 0pt; text-align: left;">
+						<span
+							th:text="${member.relationWithHof != null ? member.relationWithHof : 'N/A'}"></span>
+					</p>
+
+				</td>
+				<td style="width: 15%; border: 1pt solid; height: 10pt;">
+					<p class="s3"
+						style="padding-top: 4pt; padding-left: 10pt; text-indent: 0pt; text-align: left;">
+						<span
+							th:text="${member.memberGender != null ? member.memberGender : 'N/A'}"></span>
+					</p>
+				</td>
+				<td style="width: 15%; border: 1pt solid; height: 10pt;">
+					<p class="s3"
+						style="padding-top: 4pt; padding-left: 10pt; text-indent: 0pt; text-align: left;">
+						<span
+							th:text="${member.memberAge != null ? member.memberAge : 'N/A'}"></span>
+					</p>
+				</td>
+				<td style="width: 20%; border: 1pt solid; height: 10pt;">
+					<p class="s3"
+						style="padding-top: 4pt; padding-left: 10pt; text-indent: 0pt; text-align: left;">
+						<span
+							th:text="${member.hofStatus != null ? member.hofStatus : 'N/A'}"></span>
+
+					</p>
+				</td>
+				
+			</tr>
+
+			<tr style="height: 20pt">
+				<td colspan="6"
+					style="width: 90%; margin-left: auto; margin-right: auto; border: 1pt solid;">
+					<p class="s5"
+						style="padding-top: 1pt; padding-left: 14pt; padding-right: 14pt; text-indent: 0pt; text-align: center;">
+						~: Important Instructions, Guidelines</p>
+				</td>
+			</tr>
+
+			<tr style="height: 90pt">
+				<td colspan="6"
+					style="width: 90%; margin-left: auto; margin-right: auto; border: 1pt solid;">
+					<p class="s3"
+						style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; text-align: left;">
+						Ensure that the Jan Aadhaar card is kept secure and presented
+						whenever required for verification purposes.</p>
+					<p class="s3"
+						style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; text-align: left;">
+						The decision of the Authority Concerned is final, and the
+						cardholder must comply with the same.</p>
+					<p class="s3"
+						style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; text-align: left;">
+						All the above-mentioned information is correct according to my
+						knowledge.</p>
+					<p class="s3"
+						style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; text-align: left;">
+						The Aadhaar numbers of family members have been registered under
+						the Jan Aadhaar scheme for the purpose of receiving
+						direct/indirect benefits/services of government schemes.</p>
+					<p class="s3"
+						style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; text-align: left;">
+						I have not concealed any facts.</p>
+					<p class="s3"
+						style="padding-left: 1pt; text-indent: 0pt; line-height: 12pt; text-align: left;">
+						<b>Note : </b>Note: For detailed instructions and guidelines,
+						please refer to the official documentation provided with the Jan
+						Aadhaar card or visit the official Jan Aadhaar website.
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<button id="downloadPdfButton"
+		class="container my-2.5 flex justify-center cursor-pointer flex justify-between bg-gray-800 px-3 py-2 rounded-full text-white tracking-wider shadow-xl hover:bg-gray-900 hover:scale-105 duration-500 hover:ring-1 font-mono w-[150px]">
+		Download
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+			viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+			class="w-5 h-5 animate-bounce">
+          <path stroke-linecap="round" stroke-linejoin="round"
+				d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"></path>
+      </svg>
+	</button>
+	<script>
+    document.getElementById('downloadPdfButton').addEventListener('click', function () {
+        // Get the element you want to convert to PDF
+        const element = document.getElementById('pdfContent');
+
+        // Use html2canvas to capture the element as an image
+        html2canvas(element).then((canvas) => {
+            // Get the jsPDF instance
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Convert the canvas to an image data URL
+            const imgData = canvas.toDataURL('image/png');
+
+            // Add the image to the PDF
+            doc.addImage(imgData, 'PNG', 10, 10, 190, canvas.height * 190 / canvas.width);
+
+            // Save the PDF
+            doc.save('admit_card.pdf');
+        });
+    });
+    
+    /* $(document).ready(function() {
+        $.ajax({
+            url: '/user/showdata',
+            method: 'GET',
+            success: function(response) {
+                // Populate Table 1
+                var table1Data = response.table1Data;
+                var table1Body = $('#table1 tbody');
+                table1Data.forEach(function(item) {
+                    var row = '<tr>' +
+                                '<td>' + item.column1 + '</td>' +
+                                '<td>' + item.column2 + '</td>' +
+                                // Add more columns as needed
+                              '</tr>';
+                    table1Body.append(row);
+                });
+
+                // Populate Table 2
+                var table2Data = response.table2Data;
+                var table2Body = $('#table2 tbody');
+                table2Data.forEach(function(item) {
+                    var row = '<tr>' +
+                                '<td>' + item.column1 + '</td>' +
+                                '<td>' + item.column2 + '</td>' +
+                                // Add more columns as needed
+                              '</tr>';
+                    table2Body.append(row);
+                });
+
+                // Repeat for other tables
+            },
+            error: function(error) {
+                console.error("There was an error fetching the data:", error);
+            }
+        });
+    }); */
+    
+</script>
+</body>
+
+</html>

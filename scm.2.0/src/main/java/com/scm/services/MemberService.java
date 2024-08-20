@@ -31,4 +31,6 @@ public interface MemberService {
 
     // New method to save both MemberInfo and MemberProfession
     void saveMember(MemberInfo memberInfo, MemberProfession memberProfession);
+
+    
 }

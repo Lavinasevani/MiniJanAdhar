@@ -7,6 +7,7 @@ import com.scm.entities.Address;
 import com.scm.repositories.AddressRepository;
 import com.scm.services.AddressService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,4 +25,6 @@ public class AddressServiceImpl implements AddressService {
     public Optional<Address> findById(Long id) {
         return addressRepository.findById(id);
     }
+    
+    
 }

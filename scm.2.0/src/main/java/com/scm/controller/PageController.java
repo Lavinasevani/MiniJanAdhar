@@ -56,11 +56,7 @@ public class PageController {
 		return "/user/address";
 	} 
 
-	@RequestMapping("/user/pay")
-	public String payPage() {
-		System.out.println("Dummy address page fired");
-		return "/user/pay";
-	}
+	
 	   
 	   
 
