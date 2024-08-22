@@ -43,17 +43,17 @@ public class PageController {
 	@RequestMapping("/login")
 	public String loginpage() {
 		System.out.println("Dummy Login page fired");
-		return "/login";
+		return "login";
 	}
 	@RequestMapping("/user/createJanPage")
 	public String createJanpage() {
 		System.out.println("Dummy createJanPage fired");
-		return "/user/createForm";
+		return "user/createForm";
 	}
 	@RequestMapping("/user/JanCard")
 	public String cardJanpage() {
 		System.out.println("Dummy address page fired");
-		return "/user/address";
+		return "user/address";
 	} 
 
 	
@@ -65,7 +65,7 @@ public class PageController {
 	@RequestMapping("/user/confirm-janCard")
 	public String cardJan() {
 		System.out.println(" Dummy confirm-janCard page fired");
-		return "/user/JanCard";
+		return "user/JanCard";
 	}
 	@RequestMapping("/user/updateJanPage")
 	public String cardUJan() {
