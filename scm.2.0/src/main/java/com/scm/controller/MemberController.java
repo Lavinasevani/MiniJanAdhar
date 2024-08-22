@@ -38,7 +38,7 @@ public class MemberController {
         MemberProfessionForm memberProfessionForm = new MemberProfessionForm();
         model.addAttribute("memberProfessionForm", memberProfessionForm);
         System.out.println("Dummy New Enrollment Form Fired ..");
-        return "/user/createForm";
+        return "user/createForm";
     }
 
     @PostMapping("/user/fam/add")

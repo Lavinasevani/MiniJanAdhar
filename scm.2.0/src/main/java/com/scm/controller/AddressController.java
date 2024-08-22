@@ -36,7 +36,7 @@ public class AddressController {
         AddressForm addressForm = new AddressForm();
         model.addAttribute("addressForm", addressForm);
         System.out.println("Dummy Address form Form Fired ..");
-        return "/user/address";
+        return "user/address";
     }
     
     @PostMapping("/user/JanCardd" )

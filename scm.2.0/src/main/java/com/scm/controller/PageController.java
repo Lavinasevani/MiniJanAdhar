@@ -113,12 +113,12 @@ public class PageController {
 	
 	    @GetMapping("/user/mainPage")
 	    public String mainPage() {
-	        return "/user/MainPage"; 
+	        return "user/MainPage"; 
 	    }
 	    @GetMapping("/user/pay")
 	    public String showPayForm() {
 	        //model.addAttribute("addressForm", new AddressForm()); // Make sure this matches the object you're using in the form
-	        return "/user/pay";
+	        return "user/pay";
 	    }
 	@RequestMapping(value="/do-login" , method=RequestMethod.POST)
 	public String processLogin() {

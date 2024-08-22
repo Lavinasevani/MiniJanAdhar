@@ -49,6 +49,6 @@ public class CardController {
 //        model.addAttribute("address", address);
 
         System.out.println("Card Generation fired with familyId: " + familyNumber);
-        return "/user/card";
+        return "user/card";
     }
 }
