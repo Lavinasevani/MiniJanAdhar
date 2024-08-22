@@ -37,7 +37,7 @@ public class PageController {
 		UserForms userForms = new UserForms();
 		model.addAttribute("userForms",userForms);
 		System.out.println("Dummy Register page fired");
-		return "/loginRegister";
+		return "loginRegister";
 	}
 	// validate user 
 	@RequestMapping("/login")
