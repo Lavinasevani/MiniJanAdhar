@@ -39,6 +39,14 @@ public class PageController {
 		System.out.println("Dummy Register page fired");
 		return "loginRegister";
 	}
+	
+	@RequestMapping("/contactUs")
+	public String contact(Model model) {
+		UserForms userForms = new UserForms();
+		model.addAttribute("userForms",userForms);
+		System.out.println("Dummy Contact Us fired");
+		return "contactUs";
+	}
 	// validate user 
 	@RequestMapping("/login")
 	public String loginpage() {
@@ -70,12 +78,12 @@ public class PageController {
 	@RequestMapping("/user/updateJanPage")
 	public String cardUJan() {
 		System.out.println("Dummy updateJanPage page fired");
-		return "/user/updateForm";
+		return "user/updateForm";
 	}
 	@RequestMapping("/user/getJanPage")
 	public String cardGJan() {
 		System.out.println("Dummy getJanPage page fired");
-		return "/user/getForm";
+		return "user/getForm";
 	}
 	
 	
@@ -104,7 +112,7 @@ public class PageController {
         
         //message handler
         Message mess = Message.builder()
-.content("Registration Successfully !!").type(messageType.green).build();
+        .content("Registration Successfully !!").type(messageType.green).build();
         session.setAttribute("message",mess);
         
         // Redirect to the login registration page
