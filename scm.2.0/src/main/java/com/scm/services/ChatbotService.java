@@ -3,7 +3,6 @@ package com.scm.services;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,18 +37,16 @@ public class ChatbotService {
     }
 
     public String generateResponse(String userMessage) {
-        // Normalize the user input
         userMessage = normalizeInput(userMessage);
 
         // Check for an exact match in the response map
-        String response = responseMap.getOrDefault(userMessage,
+        String response = responseMap.getOrDefault(userMessage, 
                 "I'm not sure how to respond to that. Can you ask something else?");
         System.out.println("User message: " + userMessage + " | Bot response: " + response);
         return response;
     }
 
     private String normalizeInput(String input) {
-        // Normalize input by removing excessive characters (e.g., "hiiiiii" -> "hi")
         input = input.toLowerCase(); // Convert to lowercase for consistent matching
 
         // Use specific replacements for common variations
@@ -57,10 +54,7 @@ public class ChatbotService {
             input = "hi";
         } else if (input.matches("hello+")) {
             input = "hello";
-        } else if (input.matches("he+y+")) {
-            input = "hey";
         }
-
-        return input.trim(); // Trim any extra spaces for clean input
+        return input;
     }
 }

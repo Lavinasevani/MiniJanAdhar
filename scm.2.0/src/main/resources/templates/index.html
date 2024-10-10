@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Material Icons -->
@@ -12,8 +13,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>Mini JanAdhaar</title>
     <style>
-        /* From Uiverse.io by SchawnnahJ */
-        nav .brand-logo {
+       :root {
+    --primary-color: #4a90e2;
+    --secondary-color: #103c6e;
+    --text-color: #333;
+    --bg-color: #fff;
+    --card-bg: #f9f9f9;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav .brand-logo {
             position: absolute;
             color: #fff;
             display: inline-block;
@@ -88,76 +115,271 @@
             position: absolute;
             top: calc(50% - 1.25em);
         }
+nav ul a {
+    color: var(--bg-color);
+    transition: background-color 0.3s ease;
+}
 
-        /* Chat Icon and Chat Box Styling */
-        .chat-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #ff4081;
-            color: white;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
+nav ul a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
 
-        .chat-box {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 300px;
-            max-height: 400px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            display: none;
-            flex-direction: column;
-            border-radius: 8px;
-            overflow: hidden;
-        }
+.sidenav {
+    background-color: var(--bg-color);
+}
 
-        .chat-header {
-            background-color: #ff4081;
-            color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.sidenav li > a {
+    color: var(--text-color);
+}
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    color: white;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+}
 
-        .chat-messages {
-            padding: 10px;
-            height: 300px;
-            overflow-y: auto;
-        }
+/* Card Styles */
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .chat-input {
-            padding: 10px;
-            display: flex;
-        }
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
 
-        .chat-input input {
-            flex: 1;
-            padding: 5px;
-            border: none;
-            border-top: 1px solid #ddd;
-        }
+.card-content {
+    padding: 20px;
+}
 
-        .chat-input button {
-            padding: 5px 10px;
-            background-color: #ff4081;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.card-reveal {
+    background-color: var(--bg-color);
+}
+
+/* Chat Icon and Container */
+.chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+.chat-icon:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.chat-icon img {
+    width: 30px;
+    height: 30px;
+    filter: invert(1);
+}
+
+.chat-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 350px;
+    height: 450px;
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.chat-header {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ai-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: var(--bg-color);
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
+}
+
+.language-toggle {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.language-toggle label {
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#english:checked ~ .english-label,
+#hindi:checked ~ .hindi-label {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 10px;
+   
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 10px;
+    max-width: 80%;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.ai-message {
+    background-color: #f0f0f0;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
+
+.user-message {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+
+.chat-input {
+    display: flex;
+    padding: 5px;
+    background-color: #f0f0f0;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    border: none;
+    padding: 5px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.chat-input button, .mic-button {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.chat-input button:hover, .mic-button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* Loader Animation */
+
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        right: 0;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* CSS for pulse animation */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(0, 123, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+}
+
+/* Pulse effect when listening */
+.mic-button.listening {
+    animation: pulse 1.5s infinite;
+    background-color: #007bff; /* Change the color to indicate listening */
+    color: white;
+    border: none;
+}
+
     </style>
 </head>
-
 <body>
+
     <h1>MINI JanAdhaar</h1>
     <!-- Navigation bar -->
     <nav>
@@ -209,104 +431,151 @@
 </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        M.AutoInit(); // Initialize Materialize components
-    });
-</script>
-
-     <!-- Chat Icon -->
-    <div class="chat-icon" id="chat-icon">
+    <div class="chat-icon" onclick="toggleChat()">
         <i class="material-icons">chat</i>
+        
     </div>
 
-    <!-- Chat Box -->
-    <div class="chat-box" id="chat-box">
+    <div class="chat-container" id="chatContainer">
         <div class="chat-header">
-            <span>Chat with us</span>
-            <i class="material-icons" id="close-chat">close</i>
+            <div class="ai-avatar">AI</div>
+            <div class="language-toggle">
+                <input type="radio" id="english" name="language" checked hidden>
+                <input type="radio" id="hindi" name="language" hidden>
+                <label for="english" class="english-label" onclick="setLanguage('en')">EN</label>
+                <label for="hindi" class="hindi-label" onclick="setLanguage('hi')">HI</label>
+            </div>
+            <button class="close-button" onclick="toggleChat()">×</button>
         </div>
-        <div class="chat-messages" id="chat-messages">
-            <p>Welcome! How can we assist you today?</p>
+        <div class="chat-messages">
+            <div class="message ai-message" id="chat-messages">
+                <p>Welcome! How can we assist you today?</p>
+            </div>
+            <!-- <div class="message ai-message typing-animation">AI is typing</div> -->
+            
         </div>
         <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Type a message...">
-            <button id="send-button">Send</button>
+            <button class="mic-button" onclick="toggleMic(this)">🎤</button>
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button onclick="sendMessage()">➤</button>
         </div>
     </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    let recognition;
+    let currentLanguage = 'en';
 
-   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        M.AutoInit(); // Initialize Materialize components
-    });
+    // Toggle chat visibility
+    function toggleChat() {
+        const chatContainer = document.getElementById('chatContainer');
+        chatContainer.style.display = (chatContainer.style.display === 'none' || chatContainer.style.display === '') ? 'flex' : 'none';
+    }
 
-    const chatIcon = document.getElementById('chat-icon');
-    const chatBox = document.getElementById('chat-box');
-    const closeChat = document.getElementById('close-chat');
-    const sendButton = document.getElementById('send-button');
-    const userInput = document.getElementById('user-input');
-    const chatMessages = document.getElementById('chat-messages');
+    // Toggle mic and start speech recognition
+    function toggleMic(button) {
+        const isActive = button.classList.toggle('active');
+        if (isActive) {
+            button.classList.add('listening'); // Add pulse animation when mic is active
+            startSpeechRecognition();
+        } else {
+            button.classList.remove('listening'); // Remove pulse animation when mic is inactive
+            if (recognition) {
+                recognition.stop(); // Stop recognition when turning off the mic
+            }
+        }
+    }
 
-    // Show chat box on chat icon click
-    chatIcon.addEventListener('click', function() {
-        chatBox.style.display = 'flex';
-    });
+    // Set language for speech recognition
+    function setLanguage(language) {
+        currentLanguage = language;
+        console.log("Language set to:", language);
+    }
 
-    // Hide chat box on close button click
-    closeChat.addEventListener('click', function() {
-        chatBox.style.display = 'none';
-    });
+    // Initialize and start speech recognition
+    function startSpeechRecognition() {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert('Speech recognition not supported in your browser.');
+            return;
+        }
 
-    // Send message to the chatbot on button click
-    sendButton.addEventListener('click', function() {
-        const userMessage = userInput.value.trim();
-        if (userMessage) {
-            // Display the user's message in the chat box
-            const userMessageElement = document.createElement('p');
-            userMessageElement.textContent = `You: ${userMessage}`;
-            chatMessages.appendChild(userMessageElement);
-            userInput.value = '';
+        recognition = new webkitSpeechRecognition();
+        recognition.lang = currentLanguage === 'hi' ? 'hi-IN' : 'en-US';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById('user-input').value = transcript;
+            sendMessage();
+        };
+
+        recognition.onerror = function(event) {
+            console.error("Speech recognition error:", event.error);
+            toggleMic(document.querySelector('.mic-button')); // Turn off mic on error
+        };
+
+        recognition.onend = function() {
+            toggleMic(document.querySelector('.mic-button')); // Turn off mic when recognition ends
+        };
+
+        recognition.start();
+    }
+
+    // Send user message to the server
+    function sendMessage() {
+        const input = document.getElementById('user-input');
+        const message = input.value.trim();
+        if (message) {
+            appendMessage('user', message);
+            input.value = '';
 
             // Send the user's message to the server using fetch
-            fetch('/chat', { 
+            fetch('/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ message: userMessage }) 
+                body: JSON.stringify({ message: message })
             })
             .then(response => {
-                if (!response.ok) { // Check if the response is OK (status code 200-299)
+                if (!response.ok) {
                     throw new Error(`Server error: ${response.status}`);
                 }
                 return response.json();
             })
             .then(data => {
-                // Display the chatbot's response in the chat box
-                const botMessageElement = document.createElement('p');
-                botMessageElement.textContent = `Bot: ${data.reply}`;
-                chatMessages.appendChild(botMessageElement);
-                chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to the latest message
+                appendMessage('ai', data.reply);
             })
             .catch(error => {
-                console.error('Error:', error); // Log the error for debugging
-                const errorMessageElement = document.createElement('p');
-                errorMessageElement.textContent = 'Bot: Something went wrong, please try again!';
-                chatMessages.appendChild(errorMessageElement);
+                console.error('Error:', error);
+                appendMessage('ai', 'Something went wrong, please try again!');
             });
         }
+    }
+
+    // Append messages to the chat window
+    function appendMessage(sender, message) {
+        const chatMessages = document.querySelector('.chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'ai-message');
+        messageDiv.textContent = message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Initialize Materialize components
+    document.addEventListener('DOMContentLoaded', function() {
+        M.AutoInit();
     });
 
     // Send message on pressing the Enter key
-    userInput.addEventListener('keypress', function(e) {
+    document.getElementById('user-input').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            sendButton.click();
+            sendMessage();
         }
     });
 </script>
 
+
 </body>
-
-
 </html>

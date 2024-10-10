@@ -2,12 +2,10 @@ package com.scm.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.scm.services.ChatbotService;
 
 @RestController
